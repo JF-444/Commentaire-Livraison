@@ -23,16 +23,14 @@
 const CONFIG = {
   scriptUrl: "",
   siteCommande: "https://order.livservice.com",
-  // Photos (dossier photos/ du dépôt). Les photos absentes sont simplement ignorées.
-  // La 1re photo trouvée sert aussi de fond à l'en-tête.
+  // Photos du diaporama en haut de page (dossier photos/). Elles défilent toutes seules.
+  // "cadrage" = partie de la photo à garder visible (ex : "50% 30%" = centre, un peu en haut).
   photos: [
-    { src: "photos/livreur-1.jpg",   legende: "Nos livreurs, partout à Yaoundé" },
-    { src: "photos/livraison-1.jpg", legende: "Votre commande remise en main propre" },
-    { src: "photos/livreur-2.jpg",   legende: "Rapides, prudents, souriants" },
-    { src: "photos/livraison-2.jpg", legende: "Chaque livraison compte" },
-    { src: "photos/livreur-3.jpg",   legende: "L'équipe Liv sur la route" },
-    { src: "photos/livraison-3.jpg", legende: "Merci de nous faire confiance" },
+    { src: "photos/livraison-1.jpg", cadrage: "55% 42%" },
+    { src: "photos/livreur-1.jpg",   cadrage: "50% 28%" },
+    { src: "photos/livraison-2.jpg", cadrage: "50% 45%" },
   ],
+  delaiPhoto: 4500, // millisecondes entre deux photos
 };
 </script>
 <style>
@@ -178,27 +176,26 @@ main{margin-top:-56px;position:relative;padding-bottom:40px}
 .btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40}
 
-/* Photo d'en-tête */
-.top .photo-bg{position:absolute;inset:0;background-size:cover;background-position:center 35%;opacity:0;transition:opacity .8s;transform:scale(1.06);animation:kb 18s ease-in-out infinite alternate}
-.top .photo-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,61,46,.78) 0%,rgba(15,61,46,.72) 45%,rgba(15,61,46,.96) 100%)}
-.top.has-photo .photo-bg{opacity:1}
-@keyframes kb{to{transform:scale(1.14) translateX(-2%)}}
-.top > .gut,.top .hero{position:relative}
-
-/* Galerie */
-.gallery{margin-top:22px}
-.thanks{margin-bottom:4px}
-.gallery h2{font:800 19px/1.2 var(--display);margin:0 0 12px}
-.g-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -18px;padding:0 18px 4px;scroll-padding:0 18px}
-.g-track::-webkit-scrollbar{display:none}
-.g-item{flex:0 0 82%;scroll-snap-align:start;position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/3;background:var(--soft);margin:0}
-.g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s ease-out}
-.g-item.on img{transform:scale(1.07)}
-.g-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 16px 14px;color:#fff;font:700 15px/1.3 var(--body);background:linear-gradient(transparent,rgba(16,35,27,.85))}
-.g-dots{display:flex;justify-content:center;gap:6px;margin-top:10px}
-.g-dots button{width:8px;height:8px;border-radius:99px;border:0;padding:0;background:#C9CDBF;cursor:pointer;transition:width .3s,background .3s}
-.g-dots button[aria-current="true"]{width:22px;background:var(--green)}
-@media (min-width:600px){.g-item{flex-basis:70%}}
+/* Diaporama en haut */
+.shows{position:absolute;inset:0;overflow:hidden;opacity:0;transition:opacity .6s}
+.top.has-photo .shows{opacity:1}
+.shows .ph{position:absolute;inset:0;transform:translateX(100%);transition:transform 1s cubic-bezier(.65,0,.35,1);overflow:hidden}
+.shows .ph.cur{transform:translateX(0)}
+.shows .ph.prev{transform:translateX(-100%)}
+.shows .ph.instant{transition:none}
+.shows .ph div{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;transform:scale(1.02);transition:transform 6s ease-out}
+.shows .ph.cur div{transform:scale(1.1)}
+.shows::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(15,61,46,.55) 0%,rgba(15,61,46,0) 18%,rgba(15,61,46,0) 34%,rgba(15,61,46,.82) 60%,var(--forest) 84%)}
+.top.has-photo .arcs,.top.has-photo .road{display:none}
+.top.has-photo .hero{padding-top:min(56vw,260px)}
+.top.has-photo .brand-mark{box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.top.has-photo .bar b,.top.has-photo .bar small{text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.top.has-photo .bar small{color:#fff}
+.sdots{display:flex;gap:6px;margin-bottom:14px}
+.sdots:empty{display:none}
+.sdots i{width:7px;height:7px;border-radius:99px;background:rgba(246,245,239,.55);transition:width .4s,background .4s}
+.sdots i.on{width:22px;background:var(--yellow)}
+@media (min-width:700px){.top.has-photo .hero{padding-top:360px}.shows{left:calc(50% - 340px);right:calc(50% - 340px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}}
 
 footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:center}
 @media (max-width:380px){.rate{grid-template-columns:58px minmax(0,1fr);padding:12px 10px}.face{width:58px;height:58px}.slide .txt{font-size:14px}}
@@ -230,7 +227,7 @@ footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:cente
 </svg>
 
 <div class="top" id="top">
-  <div class="photo-bg" id="photoBg" aria-hidden="true"></div>
+  <div class="shows" id="shows" aria-hidden="true"></div>
   <svg class="arcs" viewBox="0 0 340 340" aria-hidden="true"><g fill="none" stroke-width="30"><circle cx="340" cy="0" r="300" stroke="#F28A1A"/><circle cx="340" cy="0" r="245" stroke="#F5C01E"/><circle cx="340" cy="0" r="190" stroke="#1E9E5A"/><circle cx="340" cy="0" r="135" stroke="#2E7A5C"/></g></svg>
   <div class="gut"><div class="max bar">
     <span class="brand-mark"><img src="logo.png" alt=""></span>
@@ -238,6 +235,7 @@ footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:cente
   </div></div>
   <section class="hero gut" id="hero">
     <div class="max">
+      <div class="sdots" id="sdots" aria-hidden="true"></div>
       <span class="tag">⏱ 30 secondes</span>
       <h1 id="heroTitle">Comment s'est passée votre <em>livraison&nbsp;?</em></h1>
       <p>Votre avis nous sert à <b>améliorer notre service</b> pour que votre prochaine livraison soit encore meilleure.</p>
@@ -319,11 +317,6 @@ footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:cente
       <button class="btn btn-soft" id="again" type="button">Donner un autre avis</button>
     </section>
 
-    <section class="gallery" id="gallery" hidden aria-label="Liv en action">
-      <h2>Liv en action</h2>
-      <div class="g-track" id="gTrack"></div>
-      <div class="g-dots" id="gDots"></div>
-    </section>
   </div>
 </main>
 
@@ -565,40 +558,50 @@ footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:cente
 
   addEventListener("resize", () => { if(!sending) setX(0); });
 
-  /* ---------- Photos ---------- */
+  /* ---------- Diaporama en haut ---------- */
   function loadImg(src){
     const base = src.replace(/\.(jpe?g|png|webp)$/i, "");
-    const tries = [src, ...["jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG"].map(e => base + "." + e).filter(s => s !== src)];
+    const tries = [src, ...["jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG"].map(e => base + "." + e).filter(x => x !== src)];
     return new Promise(res => {
       const next = i => { if(i >= tries.length) return res(null); const im = new Image(); im.onload = () => res(tries[i]); im.onerror = () => next(i + 1); im.src = tries[i]; };
       next(0);
     });
   }
   (async () => {
-    const found = (await Promise.all((CONFIG.photos || []).map(async p => ({ ...p, src: await loadImg(p.src) })))).filter(p => p.src);
-    if(!found.length) return;
-    $("photoBg").style.backgroundImage = `url("${found[0].src}")`; $("top").classList.add("has-photo");
-    const track = $("gTrack"), dots = $("gDots");
-    found.forEach((p, i) => {
-      const f = document.createElement("figure"); f.className = "g-item";
-      const im = document.createElement("img"); im.src = p.src; im.alt = p.legende || "Livraison Liv"; im.loading = "lazy";
-      f.append(im);
-      if(p.legende){ const c = document.createElement("figcaption"); c.textContent = p.legende; f.append(c); }
-      track.append(f);
-      const d = document.createElement("button"); d.type = "button"; d.setAttribute("aria-label", "Photo " + (i + 1));
-      d.onclick = () => go(i, true); dots.append(d);
-    });
-    $("gallery").hidden = false;
-    const items = [...track.children], ds = [...dots.children];
-    let cur = 0, timer, userAt = 0;
-    function mark(i){ cur = i; items.forEach((it, k) => it.classList.toggle("on", k === i)); ds.forEach((d, k) => d.setAttribute("aria-current", String(k === i))); }
-    function go(i, user){ if(user) userAt = Date.now(); track.scrollTo({ left: items[i].offsetLeft - 18, behavior: reduce ? "auto" : "smooth" }); mark(i); }
-    track.addEventListener("scroll", () => {
-      const i = Math.round(track.scrollLeft / (items[0].offsetWidth + 12)); if(i !== cur && items[i]) mark(i);
-    }, { passive: true });
-    track.addEventListener("pointerdown", () => { userAt = Date.now(); });
-    mark(0);
-    if(items.length > 1 && !reduce) timer = setInterval(() => { if(Date.now() - userAt > 6000 && !document.hidden) go((cur + 1) % items.length); }, 3800);
+    const list = CONFIG.photos || [];
+    if(!list.length) return;
+    const shows = $("shows"), dotsEl = $("sdots");
+    const slides = [], dots = [];
+    let cur = -1, started = false;
+    // chaque photo est ajoutée dès qu'elle est chargée (la 1re s'affiche sans attendre les autres)
+    for(const p of list){
+      const src = await loadImg(p.src);
+      if(!src) continue;
+      const ph = document.createElement("div"); ph.className = "ph";
+      const im = document.createElement("div");
+      im.style.backgroundImage = `url("${src}")`; im.style.backgroundPosition = p.cadrage || "50% 35%";
+      ph.append(im); shows.append(ph); slides.push(ph);
+      const d = document.createElement("i"); dotsEl.append(d); dots.push(d);
+      if(!started){ started = true; show(0, true); $("top").classList.add("has-photo"); }
+      dotsEl.hidden = slides.length < 2;
+    }
+    function show(i, instant){
+      const prev = cur; cur = i;
+      slides.forEach((s, k) => {
+        s.classList.toggle("instant", !!instant || (k !== cur && k !== prev));
+        s.classList.remove("cur", "prev");
+        if(k === cur) s.classList.add("cur"); else if(k === prev) s.classList.add("prev");
+      });
+      dots.forEach((d, k) => d.classList.toggle("on", k === cur));
+    }
+    if(reduce) return;
+    setInterval(() => {
+      if(slides.length < 2 || document.hidden) return;
+      const n = (cur + 1) % slides.length;
+      // place la suivante à droite sans animation, puis la fait glisser
+      slides[n].classList.add("instant"); slides[n].classList.remove("prev", "cur"); void slides[n].offsetWidth;
+      show(n);
+    }, CONFIG.delaiPhoto || 4500);
   })();
 })();
 </script>

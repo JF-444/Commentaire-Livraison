@@ -6,23 +6,13 @@ Le client note sa livraison (1 à 5 étoiles), donne son prénom, écrit un comm
 
 ---
 
-## 1. Ajouter les photos (livreurs en action, livraisons)
-Dans le dépôt GitHub, ouvrez le dossier **photos** → **Add file → Upload files**, et glissez vos photos avec **exactement** ces noms :
+## 1. Les photos du haut de page
+Les 3 photos sont dans le dossier **photos** et défilent toutes seules en haut du site (une toutes les 4,5 secondes) :
+`livraison-1.jpg` (livreur à la porte), `livreur-1.jpg` (livreur, sac Liv eats), `livraison-2.jpg` (remise du sac + app).
 
-| Nom du fichier | Idée de photo |
-|---|---|
-| `livreur-1.jpg` | Livreur sur sa moto (sert aussi de fond à l'en-tête) |
-| `livraison-1.jpg` | Remise d'une commande à un client |
-| `livreur-2.jpg` | Livreur en route dans Yaoundé |
-| `livraison-2.jpg` | Sac / colis Liv |
-| `livreur-3.jpg` | L'équipe |
-| `livraison-3.jpg` | Client satisfait |
-
-- `.jpg`, `.jpeg`, `.png` ou `.webp` fonctionnent tous.
-- Vous n'êtes pas obligé de tout mettre : les photos absentes sont ignorées. Sans aucune photo, le site garde l'illustration de la moto.
-- Pour changer les légendes : dans `index.html`, partie `photos:` en haut du fichier.
-- Gardez des photos légères (moins de 500 Ko chacune) pour que le site s'ouvre vite sur mobile.
-- Demandez l'accord des personnes qui apparaissent sur les photos.
+- **Ajouter une photo** : déposez-la dans `photos/` (moins de 500 Ko, format vertical idéal), puis ajoutez une ligne dans `photos:` en haut de `index.html`, ex : `{ src: "photos/livreur-2.jpg", cadrage: "50% 30%" },`
+- **Cadrage** : la partie de la photo qui reste visible. `"50% 30%"` = centre, un peu vers le haut (pour garder les visages).
+- **Vitesse** : `delaiPhoto` (en millisecondes).
 
 ## 2. Google Sheet pour recevoir les avis (≈ 10 min, une seule fois)
 1. Créez une **nouvelle Google Sheet** (ex : « Liv – Avis clients »).
