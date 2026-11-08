@@ -12,6 +12,11 @@
 const ONGLET_AVIS = "Avis";
 const ENTETES = ["Date", "Prénom", "Note", "Commentaire", "Points", "Référence", "Appareil"];
 const ALERTE_SI_NOTE_MAX = 2; // mettre 0 pour ne jamais recevoir d'email
+// Adresse qui reçoit les emails d'alerte. Laisser "" pour utiliser le compte qui a déployé le script.
+// Plusieurs adresses possibles, séparées par une virgule : "contact@exemple.com,moi@gmail.com"
+const EMAIL_ALERTE = "";
+
+function destinataire_() { return EMAIL_ALERTE || Session.getEffectiveUser().getEmail(); }
 
 // À lancer UNE fois après avoir collé ce code (bouton Exécuter).
 // La Sheet « Liv Services – Avis clients » est déjà prête (onglets Avis et Résumé) :
@@ -24,7 +29,7 @@ function installer() {
     a.setFrozenRows(1);
   }
 
-  MailApp.sendEmail(Session.getEffectiveUser().getEmail(),
+  MailApp.sendEmail(destinataire_(),
     "Liv Services — avis clients activés",
     "Les avis clients seront enregistrés ici :\n" + ss.getUrl() +
     "\n\nVous recevrez un email pour chaque note de " + ALERTE_SI_NOTE_MAX + " étoile(s) ou moins.");
@@ -67,7 +72,7 @@ function doPost(e) {
 
   if (note <= ALERTE_SI_NOTE_MAX) {
     try {
-      MailApp.sendEmail(Session.getEffectiveUser().getEmail(),
+      MailApp.sendEmail(destinataire_(),
         "⚠ Avis " + note + "★ de " + prenom + (ref ? " (" + ref + ")" : ""),
         "Note : " + note + "/5\nPrénom : " + prenom + (ref ? "\nRéférence : " + ref : "") +
         (points ? "\nPoints : " + points : "") + "\n\nCommentaire :\n" + (commentaire || "(aucun)") +
