@@ -182,29 +182,64 @@ main{margin-top:-56px;position:relative;padding-bottom:40px}
 .btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40}
 
-/* Diaporama en haut */
-.shows{position:absolute;inset:0;overflow:hidden;opacity:0;transition:opacity .6s}
-.top.has-photo .shows{opacity:1}
-.shows .ph{position:absolute;inset:0;transform:translateX(100%);transition:transform 1s cubic-bezier(.65,0,.35,1);overflow:hidden}
+
+footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:center}
+@media (max-width:380px){.rate{grid-template-columns:58px minmax(0,1fr);padding:12px 10px}.face{width:58px;height:58px}.slide .txt{font-size:14px}}
+/* ===== Mise en page compacte : tout tient sur un écran de téléphone ===== */
+.bar{padding-block:10px;gap:10px}
+.brand-mark{width:36px;height:36px;border-radius:10px}
+.brand-mark img{width:26px;height:26px}
+.bar b{font-size:15px}
+.bar small{font-size:12px;margin-top:3px}
+.hero{padding-block:2px 34px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 128px;gap:14px;align-items:center}
+.hero h1{font-size:clamp(23px,6.5vw,40px);line-height:1.08;margin:0 0 8px}
+.hero p{font-size:13.5px;line-height:1.45}
+.top.has-photo .road{display:none}
+.top.has-photo .arcs{opacity:.35}
+.pframe{position:relative;height:164px;border-radius:20px;overflow:hidden;background:var(--green2);border:3px solid rgba(246,245,239,.92);box-shadow:0 12px 26px rgba(0,0,0,.32);transform:rotate(2deg)}
+.shows{position:absolute;inset:0;overflow:hidden}
+.shows .ph{position:absolute;inset:0;transform:translateX(100%);transition:transform .9s cubic-bezier(.65,0,.35,1);overflow:hidden}
 .shows .ph.cur{transform:translateX(0)}
 .shows .ph.prev{transform:translateX(-100%)}
 .shows .ph.instant{transition:none}
 .shows .ph div{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;transform:scale(1.02);transition:transform 6s ease-out}
-.shows .ph.cur div{transform:scale(1.1)}
-.shows::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(15,61,46,.55) 0%,rgba(15,61,46,0) 18%,rgba(15,61,46,0) 34%,rgba(15,61,46,.82) 60%,var(--forest) 84%)}
-.top.has-photo .arcs,.top.has-photo .road{display:none}
-.top.has-photo .hero{padding-top:min(56vw,260px)}
-.top.has-photo .brand-mark{box-shadow:0 4px 14px rgba(0,0,0,.25)}
-.top.has-photo .bar b,.top.has-photo .bar small{text-shadow:0 1px 8px rgba(0,0,0,.45)}
-.top.has-photo .bar small{color:#fff}
-.sdots{display:flex;gap:6px;margin-bottom:14px}
-.sdots:empty{display:none}
-.sdots i{width:7px;height:7px;border-radius:99px;background:rgba(246,245,239,.55);transition:width .4s,background .4s}
-.sdots i.on{width:22px;background:var(--yellow)}
-@media (min-width:700px){.top.has-photo .hero{padding-top:360px}.shows{left:calc(50% - 340px);right:calc(50% - 340px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}}
-
-footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:center}
-@media (max-width:380px){.rate{grid-template-columns:58px minmax(0,1fr);padding:12px 10px}.face{width:58px;height:58px}.slide .txt{font-size:14px}}
+.shows .ph.cur div{transform:scale(1.12)}
+.shows::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34px;background:linear-gradient(transparent,rgba(16,35,27,.55));pointer-events:none}
+.sdots{position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:5px;z-index:2}
+.sdots i{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.6);transition:width .4s,background .4s}
+.sdots i.on{width:16px;background:var(--yellow)}
+main{margin-top:-22px}
+.form{padding:16px 14px 14px;gap:14px}
+.q{gap:7px}
+.q-h{gap:8px}
+.q-h .n{font-size:11px;padding:4px 6px;border-radius:7px}
+.q-h h2{font-size:16px}
+.rate{grid-template-columns:54px minmax(0,1fr);gap:10px;padding:8px 10px;border-radius:16px}
+.face{width:54px;height:54px}
+.stars{max-width:240px}
+.rate-l{font-size:14px;margin:2px 0 0 4px}
+.rate-l span{font-size:12.5px}
+.chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -14px;padding:0 14px 2px}
+.chips::-webkit-scrollbar{display:none}
+.chips:empty{display:none}
+.chip{flex:none;padding:6px 11px;font-size:13px}
+.field{position:relative}
+.field input{padding:11px 13px;border-radius:14px}
+.field textarea{min-height:78px;height:78px;padding:11px 13px 20px;border-radius:14px}
+.cnt{position:absolute;right:12px;bottom:7px;margin:0;font-size:11px;pointer-events:none}
+.send-wrap{gap:8px}
+.slide{height:62px}
+.slide .fill{width:62px}
+.slide .lane{left:66px;margin-top:16px}
+.slide .txt{padding:0 50px 0 62px;font-size:15px}
+.slide .flag{width:30px;height:30px;right:12px}
+.knob{width:54px;height:54px}
+.knob svg{width:48px;height:48px}
+.why{margin-top:12px;padding:12px 14px;font-size:13.5px}
+@media (max-height:690px){.bar{padding-block:8px}.hero{padding-bottom:28px}.pframe{height:140px}.hero h1{font-size:22px;margin-bottom:6px}.hero p{font-size:12.5px}.form{gap:10px;padding-top:12px}.q{gap:5px}.rate{padding:6px 10px}.field input{padding:9px 13px}.field textarea{min-height:62px;height:62px}.slide{height:58px}.knob{width:50px;height:50px}.slide .fill{width:58px}}
+@media (max-width:360px){.hero-grid{grid-template-columns:minmax(0,1fr) 108px}.pframe{height:146px}.hero h1{font-size:21px}.hero p{font-size:12.5px}}
+@media (min-width:700px){.hero-grid{grid-template-columns:minmax(0,1fr) 200px;gap:28px}.pframe{height:250px}.hero{padding-bottom:44px}.hero p{font-size:16px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -233,18 +268,21 @@ footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:cente
 </svg>
 
 <div class="top" id="top">
-  <div class="shows" id="shows" aria-hidden="true"></div>
   <svg class="arcs" viewBox="0 0 340 340" aria-hidden="true"><g fill="none" stroke-width="30"><circle cx="340" cy="0" r="300" stroke="#F28A1A"/><circle cx="340" cy="0" r="245" stroke="#F5C01E"/><circle cx="340" cy="0" r="190" stroke="#1E9E5A"/><circle cx="340" cy="0" r="135" stroke="#2E7A5C"/></g></svg>
   <div class="gut"><div class="max bar">
     <span class="brand-mark"><img src="logo.png" alt=""></span>
     <span><b>Liv Services</b><small>Votre avis compte</small></span>
   </div></div>
   <section class="hero gut" id="hero">
-    <div class="max">
-      <div class="sdots" id="sdots" aria-hidden="true"></div>
-      <span class="tag">⏱ 30 secondes</span>
-      <h1 id="heroTitle">Comment s'est passée votre <em>livraison&nbsp;?</em></h1>
-      <p>Votre avis nous sert à <b>améliorer notre service</b> pour que votre prochaine livraison soit encore meilleure.</p>
+    <div class="max hero-grid">
+      <div class="hero-txt">
+        <h1 id="heroTitle">Comment s'est passée votre <em>livraison&nbsp;?</em></h1>
+        <p>Votre avis nous aide à <b>améliorer notre service</b> pour la prochaine fois.</p>
+      </div>
+      <div class="pframe" id="pframe" hidden aria-hidden="true">
+        <div class="shows" id="shows"></div>
+        <div class="sdots" id="sdots"></div>
+      </div>
     </div>
     <div class="road" aria-hidden="true"><svg class="bike"><use href="#bike"/></svg></div>
   </section>
@@ -297,7 +335,6 @@ footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:cente
           <button type="button" class="knob" id="knob" aria-label="Envoyer mon avis (ou glissez la moto vers la droite)"><svg><use href="#bike"/></svg></button>
         </div>
         <p class="err" id="err" hidden></p>
-        <p class="hint">Vous pouvez aussi appuyer sur la moto.</p>
       </div>
     </form>
 
@@ -445,7 +482,7 @@ footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:cente
   const slide = $("slide"), knob = $("knob"), fill = $("fill"), txt = $("slideTxt");
   let dragging = false, startX = 0, x = 0, moved = false, sending = false;
   const maxX = () => slide.clientWidth - knob.offsetWidth - 8;
-  function setX(v){ x = v; knob.style.transform = `translateX(${v}px)`; fill.style.width = (v + 76) + "px"; txt.style.opacity = String(Math.max(0, 1 - v / (maxX() * .6))); }
+  function setX(v){ x = v; knob.style.transform = `translateX(${v}px)`; fill.style.width = (v + knob.offsetWidth + 8) + "px"; txt.style.opacity = String(Math.max(0, 1 - v / (maxX() * .6))); }
 
   knob.addEventListener("pointerdown", e => {
     if(sending) return;
@@ -588,7 +625,7 @@ footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:cente
       im.style.backgroundImage = `url("${src}")`; im.style.backgroundPosition = p.cadrage || "50% 35%";
       ph.append(im); shows.append(ph); slides.push(ph);
       const d = document.createElement("i"); dotsEl.append(d); dots.push(d);
-      if(!started){ started = true; show(0, true); $("top").classList.add("has-photo"); }
+      if(!started){ started = true; show(0, true); $("pframe").hidden = false; $("top").classList.add("has-photo"); }
       dotsEl.hidden = slides.length < 2;
     }
     function show(i, instant){
