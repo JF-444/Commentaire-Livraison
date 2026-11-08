@@ -24,7 +24,7 @@ Tout se fait avec le compte **contact@livservice.com**, dans une fenêtre où **
    - Exécuter en tant que : **Moi** (contact@livservice.com)
    - Qui a accès : **Tout le monde**. Si seule l'option « Toute personne de livservice.com » existe, l'administrateur Google Workspace doit autoriser le partage public des applications Web, sinon les clients ne pourront pas envoyer d'avis.
    → **Déployer**, puis copiez l'URL (elle se termine par `/exec`).
-5. Collez l'URL entre les guillemets de `scriptUrl: ""` dans `index.html`, sur GitHub (crayon ✏️ → **Commit changes**).
+5. Collez l'URL dans `scriptUrl` de `index.html`, sur GitHub (crayon ✏️ → **Commit changes**). Déjà fait : le site est branché sur le script du compte contact@livservice.com.
 
 Les emails d'alerte (avis à 1 ou 2 étoiles) partent vers `EMAIL_ALERTE`, réglé sur contact@livservice.com dans `Code.gs`.
 
