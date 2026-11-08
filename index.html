@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Votre avis – Liv Services</title>
+<meta name="description" content="Comment s'est passée votre livraison Liv ? Donnez-nous votre avis en 30 secondes pour nous aider à améliorer notre service.">
+<meta name="theme-color" content="#0F3D2E">
+<meta property="og:title" content="Comment s'est passée votre livraison Liv ?">
+<meta property="og:description" content="30 secondes pour nous aider à améliorer notre service. Merci !">
+<meta property="og:image" content="https://jf-444.github.io/Commentaire-Livraison/icon-512.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noindex">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<script>
+/* =====================================================================
+   CONFIGURATION — collez ici l'URL de votre script Google (se termine par /exec)
+   ===================================================================== */
+const CONFIG = {
+  scriptUrl: "",
+  siteCommande: "https://order.livservice.com",
+  // Photos (dossier photos/ du dépôt). Les photos absentes sont simplement ignorées.
+  // La 1re photo trouvée sert aussi de fond à l'en-tête.
+  photos: [
+    { src: "photos/livreur-1.jpg",   legende: "Nos livreurs, partout à Yaoundé" },
+    { src: "photos/livraison-1.jpg", legende: "Votre commande remise en main propre" },
+    { src: "photos/livreur-2.jpg",   legende: "Rapides, prudents, souriants" },
+    { src: "photos/livraison-2.jpg", legende: "Chaque livraison compte" },
+    { src: "photos/livreur-3.jpg",   legende: "L'équipe Liv sur la route" },
+    { src: "photos/livraison-3.jpg", legende: "Merci de nous faire confiance" },
+  ],
+};
+</script>
+<style>
+:root{
+  --forest:#0F3D2E; --ink:#10231B; --cream:#F6F5EF; --paper:#FDFCF8;
+  --orange:#F28A1A; --yellow:#F5C01E; --green:#1E9E5A; --green2:#2E7A5C;
+  --soft:#C8DCD2; --muted:#5B6A62; --line:#E2E4DC; --danger:#C0392B;
+  --display:"Plus Jakarta Sans",ui-sans-serif,system-ui,sans-serif;
+  --body:"DM Sans",ui-sans-serif,system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:var(--cream);color:var(--ink);font:16px/1.55 var(--body);-webkit-font-smoothing:antialiased;min-height:100dvh;overflow-x:hidden}
+button,input,textarea{font:inherit;color:inherit}
+[hidden]{display:none!important}
+.gut{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+.max{max-width:560px;margin:0 auto}
+
+/* En-tête */
+.top{background:var(--forest);color:var(--cream);position:relative;overflow:hidden;padding-top:env(safe-area-inset-top)}
+.arcs{position:absolute;right:-70px;top:-40px;width:260px;height:260px;pointer-events:none;opacity:.9}
+.bar{display:flex;align-items:center;gap:12px;padding-block:16px;position:relative}
+.brand-mark{width:42px;height:42px;border-radius:12px;background:var(--paper);display:grid;place-items:center;flex:none}
+.brand-mark img{width:30px;height:30px}
+.bar b{display:block;font:800 17px/1 var(--display);letter-spacing:.06em;text-transform:uppercase}
+.bar small{display:block;font-size:13px;color:var(--soft);margin-top:4px}
+.hero{position:relative;padding-block:10px 76px}
+.tag{display:inline-flex;align-items:center;gap:8px;background:rgba(245,192,30,.16);color:var(--yellow);border:1px solid rgba(245,192,30,.4);padding:6px 12px;border-radius:999px;font-weight:700;font-size:13px}
+.hero h1{font:800 clamp(30px,8.4vw,44px)/1.05 var(--display);letter-spacing:-.025em;margin:14px 0 10px;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+.hero p{margin:0;color:var(--soft);font-size:16.5px;max-width:30em}
+.hero p b{color:var(--cream)}
+
+/* Route + moto du haut */
+.road{position:relative;height:84px;margin-top:20px;overflow:hidden}
+.road::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:3px;background:repeating-linear-gradient(90deg,rgba(246,245,239,.35) 0 20px,transparent 20px 36px);animation:road .5s linear infinite}
+.road .bike{position:absolute;bottom:0;width:92px;height:92px;left:-100px;animation:cross 7s cubic-bezier(.45,.05,.55,.95) infinite}
+@keyframes cross{0%{transform:translateX(0)}45%,55%{transform:translateX(calc(50vw + 40px))}100%{transform:translateX(calc(100vw + 220px))}}
+@media (min-width:600px){@keyframes cross{0%{transform:translateX(0)}45%,55%{transform:translateX(330px)}100%{transform:translateX(760px)}}}
+@keyframes road{to{background-position:-36px 0}}
+.bike .w{transform-box:fill-box;transform-origin:center;animation:spin .45s linear infinite}
+.bike .sp{animation:dash .5s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes dash{0%{transform:translateX(6px);opacity:.3}100%{transform:translateX(-10px);opacity:1}}
+
+/* Carte */
+.card{background:var(--paper);border-radius:26px;border:1px solid var(--line);box-shadow:0 22px 50px -26px rgba(16,35,27,.45)}
+main{margin-top:-56px;position:relative;padding-bottom:40px}
+.form{padding:22px 18px 20px;display:flex;flex-direction:column;gap:22px}
+.q{display:flex;flex-direction:column;gap:10px}
+.q-h{display:flex;align-items:baseline;gap:10px}
+.q-h .n{font:800 12px/1 var(--display);letter-spacing:.1em;color:var(--orange);background:#FDEBD6;padding:6px 8px;border-radius:8px}
+.q-h h2{font:800 19px/1.2 var(--display);margin:0}
+.q-h .opt{font-size:13px;color:var(--muted);font-weight:500}
+
+/* Note */
+.rate{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-items:center;background:var(--cream);border-radius:20px;padding:14px 12px}
+.rate > div{min-width:0}
+.face{width:76px;height:76px;transition:transform .3s}
+.face.pop{animation:popf .35s ease-out}
+@keyframes popf{40%{transform:scale(1.14) rotate(-4deg)}}
+.stars{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;max-width:270px}
+.star{border:0;background:transparent;padding:0;cursor:pointer;width:100%;aspect-ratio:1;min-width:0;display:grid;place-items:center;border-radius:12px}
+.star svg{width:min(38px,88%);height:auto;aspect-ratio:1;transition:transform .2s cubic-bezier(.3,1.6,.5,1)}
+.star path{fill:#E1E3DA;stroke:#C9CDBF;stroke-width:1.5;transition:fill .2s,stroke .2s}
+.star.on path{fill:var(--yellow);stroke:#D9A300}
+.star.on svg{transform:scale(1.08)}
+.star.hit svg{animation:hit .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes hit{0%{transform:scale(.6) rotate(-20deg)}100%{transform:scale(1.08)}}
+.star:focus-visible{outline:3px solid rgba(30,158,90,.45)}
+.rate-l{font:800 16px/1.2 var(--display);margin:6px 0 0 4px;min-height:1.2em;color:var(--forest)}
+.rate-l span{color:var(--muted);font:500 14px var(--body)}
+
+/* Puces */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 13px;font-size:14px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background .15s,border-color .15s,color .15s;animation:chipIn .3s ease-out backwards}
+.chip[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:var(--cream)}
+.chip svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+@keyframes chipIn{from{opacity:0;transform:translateY(6px)}}
+
+/* Champs */
+.field input,.field textarea{width:100%;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:14px 15px;font-size:16px;transition:border-color .15s,box-shadow .15s}
+.field textarea{min-height:120px;resize:vertical;line-height:1.5}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 4px rgba(30,158,90,.15)}
+.cnt{text-align:right;font-size:12.5px;color:var(--muted);margin-top:4px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+/* Glisser pour envoyer */
+.send-wrap{display:flex;flex-direction:column;gap:10px}
+.slide{position:relative;height:76px;border-radius:999px;background:var(--forest);overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:none}
+.slide .fill{position:absolute;inset:0 auto 0 0;width:76px;background:linear-gradient(90deg,var(--green2),var(--green));border-radius:999px}
+.slide .lane{position:absolute;left:80px;right:22px;top:50%;height:2px;margin-top:20px;background:repeating-linear-gradient(90deg,rgba(246,245,239,.28) 0 14px,transparent 14px 26px)}
+.slide .txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0 54px 0 76px;white-space:nowrap;color:var(--cream);font:800 15.5px/1 var(--display);letter-spacing:.02em;pointer-events:none}
+.slide .txt i{font-style:normal;display:inline-block;margin-left:8px;animation:nudge 1.2s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(6px)}}
+.slide .shine{background:linear-gradient(90deg,var(--cream) 0%,var(--cream) 40%,var(--yellow) 50%,var(--cream) 60%,var(--cream) 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 2.4s linear infinite}
+@keyframes shine{from{background-position:100% 0}to{background-position:-100% 0}}
+.slide .flag{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:rgba(246,245,239,.12);display:grid;place-items:center}
+.slide .flag svg{width:18px;height:18px;fill:none;stroke:var(--yellow);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.knob{position:absolute;left:4px;top:4px;width:68px;height:68px;border-radius:50%;background:var(--yellow);border:0;padding:0;cursor:grab;display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,.25);touch-action:none}
+.knob:active{cursor:grabbing}
+.knob svg{width:60px;height:60px;margin-left:2px}
+.knob .w,.knob .sp{animation-play-state:paused}
+.slide.drag .knob .w,.slide.drag .knob .sp,.slide.go .knob .w,.slide.go .knob .sp{animation-play-state:running}
+.slide.back .knob,.slide.back .fill{transition:transform .45s cubic-bezier(.3,1.5,.5,1),width .45s cubic-bezier(.3,1.5,.5,1)}
+.slide.go .knob{transition:transform .7s cubic-bezier(.6,0,.9,.4)}
+.slide.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.slide.loading .txt{opacity:1!important}
+.knob:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.err{display:flex;gap:8px;align-items:flex-start;color:var(--danger);font-weight:500;font-size:14px;margin:0}
+.err svg{width:18px;height:18px;flex:none;margin-top:2px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.hint{font-size:13px;color:var(--muted);text-align:center;margin:0}
+.dots i{display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin:0 2px;animation:dt 1s infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes dt{50%{opacity:.25;transform:translateY(-3px)}}
+
+/* Pourquoi */
+.why{display:flex;gap:12px;align-items:flex-start;margin-top:16px;padding:16px 18px;border-radius:20px;background:#E6F2EA;color:var(--forest);font-size:14.5px}
+.why svg{width:24px;height:24px;flex:none;fill:none;stroke:var(--green);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.why p{margin:0}
+
+/* Merci */
+.thanks{padding:30px 22px 26px;text-align:center;overflow:hidden;position:relative}
+.thanks .scene{position:relative;height:130px;margin:-6px -22px 8px;background:var(--yellow);overflow:hidden}
+.thanks .scene::after{content:"";position:absolute;left:0;right:0;bottom:16px;height:4px;background:repeating-linear-gradient(90deg,rgba(15,61,46,.45) 0 22px,transparent 22px 40px);animation:road .4s linear infinite}
+.thanks .scene .bike{position:absolute;bottom:4px;left:50%;width:130px;height:130px;margin-left:-65px;animation:arrive 1.1s cubic-bezier(.2,.8,.3,1) both,bob .6s .9s ease-in-out infinite alternate}
+@keyframes arrive{from{transform:translateX(-120vw)}}
+@keyframes bob{to{transform:translateY(-3px)}}
+.thanks .heart{position:absolute;top:14px;left:50%;margin-left:40px;width:34px;height:34px;animation:heart 1s 1s ease-out both}
+@keyframes heart{0%{opacity:0;transform:scale(.2) translateY(20px)}60%{opacity:1;transform:scale(1.2)}100%{transform:scale(1)}}
+.thanks h2{font:800 30px/1.1 var(--display);margin:8px 0 10px;letter-spacing:-.02em}
+.thanks h2 em{font-style:normal;color:var(--green)}
+.thanks p{color:var(--muted);margin:0 auto 10px;max-width:26em}
+.thanks .big{font:800 18px/1.3 var(--display);color:var(--forest);margin:18px 0 20px}
+.recap{display:inline-flex;align-items:center;gap:10px;background:var(--cream);border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px;margin-bottom:6px}
+.recap .st{color:#D9A300;letter-spacing:2px}
+.btn{appearance:none;border:0;border-radius:999px;padding:16px 22px;font:700 16px/1 var(--body);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;width:100%;transition:transform .12s}
+.btn:active{transform:scale(.97)}
+.btn-forest{background:var(--forest);color:var(--cream)}
+.btn-soft{background:#EEF0E8;color:var(--forest);margin-top:10px}
+.btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40}
+
+/* Photo d'en-tête */
+.top .photo-bg{position:absolute;inset:0;background-size:cover;background-position:center 35%;opacity:0;transition:opacity .8s;transform:scale(1.06);animation:kb 18s ease-in-out infinite alternate}
+.top .photo-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,61,46,.78) 0%,rgba(15,61,46,.72) 45%,rgba(15,61,46,.96) 100%)}
+.top.has-photo .photo-bg{opacity:1}
+@keyframes kb{to{transform:scale(1.14) translateX(-2%)}}
+.top > .gut,.top .hero{position:relative}
+
+/* Galerie */
+.gallery{margin-top:22px}
+.thanks{margin-bottom:4px}
+.gallery h2{font:800 19px/1.2 var(--display);margin:0 0 12px}
+.g-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -18px;padding:0 18px 4px;scroll-padding:0 18px}
+.g-track::-webkit-scrollbar{display:none}
+.g-item{flex:0 0 82%;scroll-snap-align:start;position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/3;background:var(--soft);margin:0}
+.g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s ease-out}
+.g-item.on img{transform:scale(1.07)}
+.g-item figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 16px 14px;color:#fff;font:700 15px/1.3 var(--body);background:linear-gradient(transparent,rgba(16,35,27,.85))}
+.g-dots{display:flex;justify-content:center;gap:6px;margin-top:10px}
+.g-dots button{width:8px;height:8px;border-radius:99px;border:0;padding:0;background:#C9CDBF;cursor:pointer;transition:width .3s,background .3s}
+.g-dots button[aria-current="true"]{width:22px;background:var(--green)}
+@media (min-width:600px){.g-item{flex-basis:70%}}
+
+footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:center}
+@media (max-width:380px){.rate{grid-template-columns:58px minmax(0,1fr);padding:12px 10px}.face{width:58px;height:58px}.slide .txt{font-size:14px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="bike" viewBox="0 0 180 180">
+    <g class="sp" stroke="#F5C01E" stroke-linecap="round" stroke-width="6"><path d="M14 74h24M6 94h24M16 114h18"/></g>
+    <rect x="44" y="52" width="44" height="40" rx="7" fill="#1E9E5A" stroke="#0F3D2E" stroke-width="5"/>
+    <path d="M52 66q14-10 28 0" fill="none" stroke="#F28A1A" stroke-width="5" stroke-linecap="round"/>
+    <path d="M54 78q12-8 24 0" fill="none" stroke="#F6F5EF" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="112" cy="44" r="13" fill="#0F3D2E"/>
+    <path d="M99 40q13-14 27-2l6 2h-33z" fill="#1E9E5A" stroke="#0F3D2E" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M104 58q10-4 18 4l10 22-10 4-10-16z" fill="#1E9E5A" stroke="#0F3D2E" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M118 66l18 10" stroke="#0F3D2E" stroke-width="6" stroke-linecap="round"/>
+    <path d="M108 86l-6 24h22" fill="none" stroke="#0F3D2E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M40 118h34l14-8h34l12-18" fill="none" stroke="#0F3D2E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M70 104h50l-6 14H64z" fill="#1E9E5A" stroke="#0F3D2E" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M134 92l6-16h10" fill="none" stroke="#0F3D2E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="w"><circle cx="50" cy="132" r="17" fill="#F6F5EF" stroke="#0F3D2E" stroke-width="8"/><path d="M50 120v24M38 132h24" stroke="#0F3D2E" stroke-width="3"/></g>
+    <g class="w"><circle cx="140" cy="132" r="17" fill="#F6F5EF" stroke="#0F3D2E" stroke-width="8"/><path d="M140 120v24M128 132h24" stroke="#0F3D2E" stroke-width="3"/></g>
+  </symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3-4.6-4.4 6.3-.9z" stroke-linejoin="round"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+</svg>
+
+<div class="top" id="top">
+  <div class="photo-bg" id="photoBg" aria-hidden="true"></div>
+  <svg class="arcs" viewBox="0 0 340 340" aria-hidden="true"><g fill="none" stroke-width="30"><circle cx="340" cy="0" r="300" stroke="#F28A1A"/><circle cx="340" cy="0" r="245" stroke="#F5C01E"/><circle cx="340" cy="0" r="190" stroke="#1E9E5A"/><circle cx="340" cy="0" r="135" stroke="#2E7A5C"/></g></svg>
+  <div class="gut"><div class="max bar">
+    <span class="brand-mark"><img src="logo.png" alt=""></span>
+    <span><b>Liv Services</b><small>Votre avis compte</small></span>
+  </div></div>
+  <section class="hero gut" id="hero">
+    <div class="max">
+      <span class="tag">⏱ 30 secondes</span>
+      <h1 id="heroTitle">Comment s'est passée votre <em>livraison&nbsp;?</em></h1>
+      <p>Votre avis nous sert à <b>améliorer notre service</b> pour que votre prochaine livraison soit encore meilleure.</p>
+    </div>
+    <div class="road" aria-hidden="true"><svg class="bike"><use href="#bike"/></svg></div>
+  </section>
+</div>
+
+<main class="gut">
+  <div class="max">
+
+    <!-- FORMULAIRE -->
+    <form class="card form" id="form" novalidate autocomplete="on">
+      <div class="q">
+        <div class="q-h"><span class="n">1</span><h2 id="rateTitle">Votre note</h2></div>
+        <div class="rate">
+          <svg class="face" id="face" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="46" fill="#F5C01E" stroke="#0F3D2E" stroke-width="5"/>
+            <ellipse id="eyeL" cx="35" cy="40" rx="5" ry="6" fill="#0F3D2E"/>
+            <ellipse id="eyeR" cx="65" cy="40" rx="5" ry="6" fill="#0F3D2E"/>
+            <circle id="blushL" cx="24" cy="58" r="6" fill="#F28A1A" opacity="0"/>
+            <circle id="blushR" cx="76" cy="58" r="6" fill="#F28A1A" opacity="0"/>
+            <path id="mouth" d="M32 66 Q50 66 68 66" fill="none" stroke="#0F3D2E" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <div class="stars" role="radiogroup" aria-labelledby="rateTitle" id="stars"></div>
+            <p class="rate-l" id="rateLabel" aria-live="polite"><span>Touchez une étoile</span></p>
+          </div>
+        </div>
+        <div class="chips" id="chips" aria-label="Points marquants"></div>
+      </div>
+
+      <div class="q">
+        <div class="q-h"><span class="n">2</span><h2><label for="prenom">Votre prénom</label></h2></div>
+        <div class="field"><input id="prenom" name="given-name" autocomplete="given-name" maxlength="40" placeholder="Ex : Aïcha"></div>
+      </div>
+
+      <div class="q">
+        <div class="q-h"><span class="n">3</span><h2><label for="msg">Votre commentaire</label></h2></div>
+        <div class="field">
+          <textarea id="msg" maxlength="800" placeholder="Racontez-nous : ponctualité, accueil du livreur, état de la commande…"></textarea>
+          <div class="cnt" id="cnt">0 / 800</div>
+        </div>
+      </div>
+      <input class="hp" id="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="send-wrap">
+        <div class="slide" id="slide">
+          <div class="fill" id="fill"></div>
+          <div class="lane"></div>
+          <div class="txt" id="slideTxt"><span class="shine">Glissez pour envoyer</span><i>›</i></div>
+          <span class="flag" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span>
+          <button type="button" class="knob" id="knob" aria-label="Envoyer mon avis (ou glissez la moto vers la droite)"><svg><use href="#bike"/></svg></button>
+        </div>
+        <p class="err" id="err" hidden></p>
+        <p class="hint">Vous pouvez aussi appuyer sur la moto.</p>
+      </div>
+    </form>
+
+    <div class="why" id="why">
+      <svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4l-5.2 2.7 1-5.8L3.5 9.2l5.9-.8z"/></svg>
+      <p>Chaque avis est lu par l'équipe Liv. Il nous aide à former nos livreurs et à corriger ce qui ne va pas, <b>pour faire mieux la prochaine fois</b>.</p>
+    </div>
+
+    <!-- MERCI -->
+    <section class="card thanks" id="thanks" hidden aria-live="polite">
+      <div class="scene" aria-hidden="true">
+        <svg class="bike"><use href="#bike"/></svg>
+        <svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" fill="#F28A1A" stroke="#0F3D2E" stroke-width="1.8"/></svg>
+      </div>
+      <div class="recap" id="recap"></div>
+      <h2>Merci <em id="tName"></em>&nbsp;!</h2>
+      <p id="tMsg">Votre avis est bien arrivé chez nous.</p>
+      <p>Il nous permettra d'améliorer notre service pour la prochaine fois.</p>
+      <p class="big">À très bientôt sur Liv ! 🛵</p>
+      <a class="btn btn-forest" id="orderLink" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Commander sur Liv
+      </a>
+      <button class="btn btn-soft" id="again" type="button">Donner un autre avis</button>
+    </section>
+
+    <section class="gallery" id="gallery" hidden aria-label="Liv en action">
+      <h2>Liv en action</h2>
+      <div class="g-track" id="gTrack"></div>
+      <div class="g-dots" id="gDots"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="gut">Liv Services · Livraison à Yaoundé</footer>
+<canvas id="confetti" hidden></canvas>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const store = {
+    get(k,d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+    set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  };
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Paramètres du lien WhatsApp : ?p=Prénom&ref=LIV-1234 */
+  const qs = new URLSearchParams(location.search);
+  const ref = (qs.get("ref") || qs.get("r") || "").slice(0, 60);
+  const pre = (qs.get("p") || qs.get("prenom") || "").slice(0, 40);
+  if(pre) $("prenom").value = pre;
+  else $("prenom").value = store.get("liv_prenom", "");
+  $("orderLink").href = CONFIG.siteCommande;
+
+  /* ---------- Note ---------- */
+  const LABELS = ["", "Très décevant", "Décevant", "Correct", "Bien", "Excellent !"];
+  const SUBS = ["", "Dites-nous ce qui n'a pas été", "On veut comprendre", "Qu'est-ce qui manquait ?", "Merci !", "Vous nous faites plaisir"];
+  const PH = [
+    "Racontez-nous : ponctualité, accueil du livreur, état de la commande…",
+    "Qu'est-ce qui n'a pas été ? Dites-nous tout, on veut corriger ça.",
+    "Qu'est-ce qui n'a pas été ? Dites-nous tout, on veut corriger ça.",
+    "Qu'est-ce qui aurait rendu la livraison parfaite ?",
+    "Qu'avez-vous apprécié ? Que pourrait-on faire encore mieux ?",
+    "Qu'avez-vous apprécié ? Un petit mot pour votre livreur ?"
+  ];
+  const CHIPS_BAD = ["Retard", "Livreur difficile à joindre", "Commande abîmée", "Accueil du livreur", "Erreur dans la commande"];
+  const CHIPS_GOOD = ["Livreur ponctuel", "Livreur aimable", "Commande en bon état", "Bonne communication", "Rapide"];
+  let note = 0, points = new Set();
+
+  const starsEl = $("stars");
+  for(let i = 1; i <= 5; i++){
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "star"; b.setAttribute("role", "radio");
+    b.setAttribute("aria-checked", "false"); b.setAttribute("aria-label", i + " étoile" + (i > 1 ? "s" : "") + " – " + LABELS[i]);
+    b.tabIndex = i === 1 ? 0 : -1;
+    b.innerHTML = '<svg viewBox="0 0 24 24"><use href="#i-star"/></svg>';
+    b.querySelector("svg").innerHTML = '<path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3-4.6-4.4 6.3-.9z" stroke-linejoin="round"/>';
+    b.onclick = () => setNote(i, true);
+    b.onmouseenter = () => paint(i);
+    b.onmouseleave = () => paint(note);
+    b.onkeydown = e => {
+      if(e.key === "ArrowRight" || e.key === "ArrowUp"){ e.preventDefault(); setNote(Math.min(5, (note || 0) + 1), true); }
+      if(e.key === "ArrowLeft" || e.key === "ArrowDown"){ e.preventDefault(); setNote(Math.max(1, (note || 2) - 1), true); }
+    };
+    starsEl.append(b);
+  }
+  const stars = [...starsEl.children];
+  function paint(n){ stars.forEach((s, i) => s.classList.toggle("on", i < n)); }
+
+  function setNote(n, user){
+    const prev = note; note = n;
+    paint(n);
+    stars.forEach((s, i) => {
+      s.setAttribute("aria-checked", String(i + 1 === n)); s.tabIndex = i + 1 === n ? 0 : -1;
+      s.classList.remove("hit");
+      if(user && i < n){ void s.offsetWidth; s.style.animationDelay = (i * 45) + "ms"; s.classList.add("hit"); }
+    });
+    if(user) stars[n - 1].focus();
+    $("rateLabel").innerHTML = ""; const b = document.createElement("span");
+    $("rateLabel").textContent = LABELS[n] + " ";
+    b.textContent = "· " + SUBS[n]; $("rateLabel").append(b);
+    $("msg").placeholder = PH[n];
+    animateFace(n);
+    const wasGood = prev >= 4, isGood = n >= 4;
+    if(!prev || wasGood !== isGood) renderChips();
+    if(!$("err").hidden && n) $("err").hidden = true;
+  }
+
+  function renderChips(){
+    points.clear();
+    const list = note >= 4 ? CHIPS_GOOD : CHIPS_BAD;
+    const el = $("chips"); el.innerHTML = "";
+    list.forEach((t, i) => {
+      const c = document.createElement("button");
+      c.type = "button"; c.className = "chip"; c.setAttribute("aria-pressed", "false");
+      c.style.animationDelay = (i * 50) + "ms";
+      c.innerHTML = '<svg viewBox="0 0 24 24" hidden><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span></span>';
+      c.lastChild.textContent = t;
+      c.onclick = () => {
+        const on = !points.has(t); on ? points.add(t) : points.delete(t);
+        c.setAttribute("aria-pressed", String(on)); c.firstChild.hidden = !on;
+      };
+      el.append(c);
+    });
+  }
+
+  /* Visage animé */
+  const face = { m: 0, eye: 6, blush: 0 };
+  const TARGET = { 0:[0,6,0], 1:[-14,4,0], 2:[-7,5,0], 3:[0,6,0], 4:[10,6,.35], 5:[18,3,.7] };
+  let raf;
+  function animateFace(n){
+    const [m, eye, blush] = TARGET[n]; const from = { ...face }; const t0 = performance.now();
+    $("face").classList.remove("pop"); void $("face").offsetWidth; $("face").classList.add("pop");
+    cancelAnimationFrame(raf);
+    const step = t => {
+      const k = reduce ? 1 : Math.min(1, (t - t0) / 320), e = 1 - Math.pow(1 - k, 3);
+      face.m = from.m + (m - from.m) * e; face.eye = from.eye + (eye - from.eye) * e; face.blush = from.blush + (blush - from.blush) * e;
+      $("mouth").setAttribute("d", `M32 ${66 - face.m * .25} Q50 ${66 + face.m} 68 ${66 - face.m * .25}`);
+      $("eyeL").setAttribute("ry", face.eye); $("eyeR").setAttribute("ry", face.eye);
+      $("blushL").setAttribute("opacity", face.blush); $("blushR").setAttribute("opacity", face.blush);
+      if(k < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  }
+
+  /* Compteur */
+  $("msg").addEventListener("input", e => { $("cnt").textContent = e.target.value.length + " / 800"; });
+  $("prenom").addEventListener("input", () => { if(!$("err").hidden) $("err").hidden = true; });
+
+  /* ---------- Glisser la moto ---------- */
+  const slide = $("slide"), knob = $("knob"), fill = $("fill"), txt = $("slideTxt");
+  let dragging = false, startX = 0, x = 0, moved = false, sending = false;
+  const maxX = () => slide.clientWidth - knob.offsetWidth - 8;
+  function setX(v){ x = v; knob.style.transform = `translateX(${v}px)`; fill.style.width = (v + 76) + "px"; txt.style.opacity = String(Math.max(0, 1 - v / (maxX() * .6))); }
+
+  knob.addEventListener("pointerdown", e => {
+    if(sending) return;
+    dragging = true; moved = false; startX = e.clientX - x;
+    knob.setPointerCapture(e.pointerId);
+    slide.classList.remove("back"); slide.classList.add("drag");
+  });
+  knob.addEventListener("pointermove", e => {
+    if(!dragging) return;
+    const v = Math.max(0, Math.min(maxX(), e.clientX - startX));
+    if(Math.abs(v - x) > 2) moved = true;
+    setX(v);
+  });
+  function release(){
+    if(!dragging) return;
+    dragging = false; slide.classList.remove("drag");
+    if(!moved){ setX(0); trySend(); return; }
+    if(x >= maxX() * .82) trySend(); else snapBack();
+  }
+  knob.addEventListener("pointerup", release);
+  knob.addEventListener("pointercancel", () => { dragging = false; slide.classList.remove("drag"); snapBack(); });
+  knob.addEventListener("click", e => { if(e.detail === 0) trySend(); }); /* clavier */
+
+  function snapBack(){ slide.classList.add("back"); setX(0); setTimeout(() => slide.classList.remove("back"), 460); }
+
+  function showErr(msg){
+    const el = $("err"); el.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg><span></span>';
+    el.lastChild.textContent = msg; el.hidden = false;
+    slide.classList.remove("shake"); void slide.offsetWidth; slide.classList.add("shake");
+    if(navigator.vibrate) navigator.vibrate(60);
+  }
+
+  function trySend(){
+    if(sending) return;
+    const prenom = $("prenom").value.trim();
+    if(!note){ snapBack(); showErr("Choisissez d'abord une note avec les étoiles."); starsEl.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+    if(prenom.length < 2){ snapBack(); showErr("Indiquez votre prénom."); $("prenom").focus({ preventScroll: true }); $("prenom").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+    send(prenom);
+  }
+
+  async function send(prenom){
+    sending = true; $("err").hidden = true;
+    /* la moto file jusqu'au drapeau */
+    slide.classList.remove("back"); slide.classList.add("go");
+    setX(maxX());
+    txt.style.opacity = "1"; txt.innerHTML = '<span>Envoi en cours</span>&nbsp;<span class="dots"><i></i><i></i><i></i></span>';
+    slide.classList.add("loading");
+    const data = {
+      prenom, note, commentaire: $("msg").value.trim(), points: [...points].join(", "),
+      ref, site: $("site").value, appareil: /iphone|ipad/i.test(navigator.userAgent) ? "iPhone" : /android/i.test(navigator.userAgent) ? "Android" : "Ordinateur"
+    };
+    store.set("liv_prenom", prenom);
+    const t0 = Date.now();
+    let ok = false;
+    try{
+      if(!CONFIG.scriptUrl){ await new Promise(r => setTimeout(r, 900)); ok = true; console.warn("CONFIG.scriptUrl est vide : l'avis n'est pas enregistré (mode démo)."); }
+      else{
+        const ctrl = new AbortController(); const tm = setTimeout(() => ctrl.abort(), 20000);
+        const r = await fetch(CONFIG.scriptUrl, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data), signal: ctrl.signal });
+        clearTimeout(tm);
+        const res = await r.json(); ok = !!res.ok;
+      }
+    }catch(_){ ok = false; }
+    const wait = 1100 - (Date.now() - t0); if(wait > 0) await new Promise(r => setTimeout(r, wait));
+    if(ok) done(prenom);
+    else{
+      sending = false; slide.classList.remove("go", "loading");
+      txt.innerHTML = '<span class="shine">Glissez pour envoyer</span><i>›</i>';
+      snapBack(); showErr("L'envoi n'a pas abouti. Vérifiez votre connexion internet puis réessayez.");
+    }
+  }
+
+  function done(prenom){
+    $("form").hidden = true; $("why").hidden = true; $("hero").querySelector(".road").hidden = true;
+    $("heroTitle").innerHTML = "Avis <em>bien reçu</em> ✓";
+    $("tName").textContent = prenom;
+    $("recap").innerHTML = `<span class="st">${"★".repeat(note)}${"☆".repeat(5 - note)}</span><span>${LABELS[note]}</span>`;
+    $("tMsg").textContent = note <= 2
+      ? "Nous sommes désolés que cette livraison n'ait pas été à la hauteur. Votre message a été transmis à l'équipe Liv."
+      : note === 3 ? "Votre avis est bien arrivé. On note vos remarques pour progresser."
+      : "Votre avis est bien arrivé. Ça fait plaisir à toute l'équipe, et à votre livreur !";
+    $("thanks").hidden = false;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    if(note >= 3 && !reduce) setTimeout(confetti, 700);
+  }
+
+  $("again").onclick = () => {
+    note = 0; paint(0); stars.forEach(s => { s.setAttribute("aria-checked", "false"); s.classList.remove("hit"); });
+    $("rateLabel").innerHTML = "<span>Touchez une étoile</span>"; $("chips").innerHTML = ""; points.clear();
+    $("msg").value = ""; $("cnt").textContent = "0 / 800"; $("msg").placeholder = PH[0]; animateFace(0);
+    sending = false; slide.classList.remove("go", "loading");
+    txt.innerHTML = '<span class="shine">Glissez pour envoyer</span><i>›</i>'; setX(0);
+    $("thanks").hidden = true; $("form").hidden = false; $("why").hidden = false; $("hero").querySelector(".road").hidden = false;
+    $("heroTitle").innerHTML = "Comment s'est passée votre <em>livraison&nbsp;?</em>";
+  };
+
+  /* Confettis aux couleurs Liv */
+  function confetti(){
+    const cv = $("confetti"), ctx = cv.getContext("2d"); cv.hidden = false;
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; ctx.scale(dpr, dpr);
+    const C = ["#F28A1A", "#F5C01E", "#1E9E5A", "#2E7A5C", "#0F3D2E"];
+    const P = Array.from({ length: 140 }, () => ({
+      x: innerWidth / 2 + (Math.random() - .5) * 80, y: innerHeight * .3,
+      vx: (Math.random() - .5) * 12, vy: -Math.random() * 12 - 4,
+      r: Math.random() * 6 + 4, c: C[Math.floor(Math.random() * C.length)], a: Math.random() * 6, va: (Math.random() - .5) * .3
+    }));
+    const t0 = performance.now();
+    (function f(t){
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      P.forEach(p => { p.vy += .32; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.a += p.va;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2); ctx.restore(); });
+      if(t - t0 < 3200) requestAnimationFrame(f); else { cv.hidden = true; }
+    })(t0);
+  }
+
+  addEventListener("resize", () => { if(!sending) setX(0); });
+
+  /* ---------- Photos ---------- */
+  function loadImg(src){
+    const base = src.replace(/\.(jpe?g|png|webp)$/i, "");
+    const tries = [src, ...["jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG"].map(e => base + "." + e).filter(s => s !== src)];
+    return new Promise(res => {
+      const next = i => { if(i >= tries.length) return res(null); const im = new Image(); im.onload = () => res(tries[i]); im.onerror = () => next(i + 1); im.src = tries[i]; };
+      next(0);
+    });
+  }
+  (async () => {
+    const found = (await Promise.all((CONFIG.photos || []).map(async p => ({ ...p, src: await loadImg(p.src) })))).filter(p => p.src);
+    if(!found.length) return;
+    $("photoBg").style.backgroundImage = `url("${found[0].src}")`; $("top").classList.add("has-photo");
+    const track = $("gTrack"), dots = $("gDots");
+    found.forEach((p, i) => {
+      const f = document.createElement("figure"); f.className = "g-item";
+      const im = document.createElement("img"); im.src = p.src; im.alt = p.legende || "Livraison Liv"; im.loading = "lazy";
+      f.append(im);
+      if(p.legende){ const c = document.createElement("figcaption"); c.textContent = p.legende; f.append(c); }
+      track.append(f);
+      const d = document.createElement("button"); d.type = "button"; d.setAttribute("aria-label", "Photo " + (i + 1));
+      d.onclick = () => go(i, true); dots.append(d);
+    });
+    $("gallery").hidden = false;
+    const items = [...track.children], ds = [...dots.children];
+    let cur = 0, timer, userAt = 0;
+    function mark(i){ cur = i; items.forEach((it, k) => it.classList.toggle("on", k === i)); ds.forEach((d, k) => d.setAttribute("aria-current", String(k === i))); }
+    function go(i, user){ if(user) userAt = Date.now(); track.scrollTo({ left: items[i].offsetLeft - 18, behavior: reduce ? "auto" : "smooth" }); mark(i); }
+    track.addEventListener("scroll", () => {
+      const i = Math.round(track.scrollLeft / (items[0].offsetWidth + 12)); if(i !== cur && items[i]) mark(i);
+    }, { passive: true });
+    track.addEventListener("pointerdown", () => { userAt = Date.now(); });
+    mark(0);
+    if(items.length > 1 && !reduce) timer = setInterval(() => { if(Date.now() - userAt > 6000 && !document.hidden) go((cur + 1) % items.length); }, 3800);
+  })();
+})();
+</script>
+</body>
+</html>
