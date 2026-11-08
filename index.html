@@ -28,7 +28,10 @@
    ===================================================================== */
 const CONFIG = {
   scriptUrl: "https://script.google.com/macros/s/AKfycbymL76_Ub7KARnELV3hymhEP6nq4Jk5vvlkw4Fcdjng_oTAYgkgIw9k0Qyp8ggJjH0b/exec",
-  siteCommande: "https://order.livservice.com",
+  // Bouton « Commander sur Liv Eats » : la bonne boutique selon le téléphone du client
+  appStore:   "https://apps.apple.com/fr/app/liv-eats/id6759439603",
+  googlePlay: "https://play.google.com/store/apps/details?id=com.liv.ordering",
+  siteCommande: "https://order.livservice.com", // ordinateur
   // Photos du diaporama en haut de page (dossier photos/). Elles défilent toutes seules.
   // "cadrage" = partie de la photo à garder visible (ex : "50% 30%" = centre, un peu en haut).
   photos: [
@@ -381,7 +384,9 @@ main{margin-top:-22px}
   const pre = (qs.get("p") || qs.get("prenom") || "").slice(0, 40);
   if(pre) $("prenom").value = pre;
   else $("prenom").value = store.get("liv_prenom", "");
-  $("orderLink").href = CONFIG.siteCommande;
+  const ua = navigator.userAgent;
+  const iOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  $("orderLink").href = iOS ? CONFIG.appStore : /android/i.test(ua) ? CONFIG.googlePlay : CONFIG.siteCommande;
 
   /* ---------- Note ---------- */
   const LABELS = ["", "Très décevant", "Décevant", "Correct", "Bien", "Excellent !"];
