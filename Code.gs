@@ -1,6 +1,8 @@
 /**
  * Liv Services — Avis clients après livraison
- * À coller dans une Google Sheet : Extensions > Apps Script (remplace tout le code présent)
+ * À coller dans la Google Sheet « Liv Services – Avis clients » :
+ * https://docs.google.com/spreadsheets/d/1ab0SSU17Bkf_hKNTx0qB705vs5wBOG-unhrA5CEGc-g/edit
+ * Extensions > Apps Script (remplace tout le code présent)
  *
  * Onglet "Avis"   : rempli automatiquement (Date | Prénom | Note | Commentaire | Points | Référence | Appareil)
  * Onglet "Résumé" : note moyenne, nombre d'avis, répartition des notes (calculés tout seuls)
@@ -8,36 +10,19 @@
  */
 
 const ONGLET_AVIS = "Avis";
-const ONGLET_RESUME = "Résumé";
 const ENTETES = ["Date", "Prénom", "Note", "Commentaire", "Points", "Référence", "Appareil"];
 const ALERTE_SI_NOTE_MAX = 2; // mettre 0 pour ne jamais recevoir d'email
 
 // À lancer UNE fois après avoir collé ce code (bouton Exécuter).
+// La Sheet « Liv Services – Avis clients » est déjà prête (onglets Avis et Résumé) :
+// cette fonction ne la modifie pas, elle autorise seulement l'écriture et les emails.
 function installer() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const a = ss.getSheetByName(ONGLET_AVIS) || ss.insertSheet(ONGLET_AVIS);
-  a.getRange(1, 1, 1, ENTETES.length).setValues([ENTETES]).setFontWeight("bold").setBackground("#0F3D2E").setFontColor("#F6F5EF");
-  a.setFrozenRows(1);
-  a.setColumnWidth(4, 420);
-  a.getRange("D:E").setWrap(true);
-  a.getRange("A:A").setNumberFormat("dd/MM/yyyy HH:mm");
-
-  const r = ss.getSheetByName(ONGLET_RESUME) || ss.insertSheet(ONGLET_RESUME);
-  r.clear();
-  r.getRange("A1:B4").setValues([
-    ["Note moyenne", "=IFERROR(ROUND(AVERAGE(Avis!C2:C),2),\"-\")"],
-    ["Nombre d'avis", "=COUNT(Avis!C2:C)"],
-    ["Avis des 7 derniers jours", "=COUNTIF(Avis!A2:A,\">=\"&(TODAY()-7))"],
-    ["Moyenne 7 derniers jours", "=IFERROR(ROUND(AVERAGEIF(Avis!A2:A,\">=\"&(TODAY()-7),Avis!C2:C),2),\"-\")"],
-  ]);
-  r.getRange("A6:C6").setValues([["Étoiles", "Nombre", "%"]]).setFontWeight("bold");
-  for (let s = 5; s >= 1; s--) {
-    const row = 7 + (5 - s);
-    r.getRange(row, 1, 1, 3).setValues([[s + " ★", "=COUNTIF(Avis!C2:C," + s + ")", "=IFERROR(B" + row + "/$B$2,0)"]]);
+  if (a.getLastRow() === 0) {
+    a.getRange(1, 1, 1, ENTETES.length).setValues([ENTETES]).setFontWeight("bold").setBackground("#0F3D2E").setFontColor("#F6F5EF");
+    a.setFrozenRows(1);
   }
-  r.getRange("C7:C11").setNumberFormat("0%");
-  r.getRange("A1:A4").setFontWeight("bold");
-  r.setColumnWidth(1, 220);
 
   MailApp.sendEmail(Session.getEffectiveUser().getEmail(),
     "Liv Services — avis clients activés",

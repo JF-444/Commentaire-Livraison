@@ -14,15 +14,17 @@ Les 3 photos sont dans le dossier **photos** et défilent toutes seules en haut 
 - **Cadrage** : la partie de la photo qui reste visible. `"50% 30%"` = centre, un peu vers le haut (pour garder les visages).
 - **Vitesse** : `delaiPhoto` (en millisecondes).
 
-## 2. Google Sheet pour recevoir les avis (≈ 10 min, une seule fois)
-1. Créez une **nouvelle Google Sheet** (ex : « Liv – Avis clients »).
-2. **Extensions → Apps Script**. Effacez le code, collez tout `Code.gs`, **Enregistrer**.
-3. Choisissez la fonction **installer** → **Exécuter** → acceptez les autorisations. Les onglets **Avis** et **Résumé** sont créés et vous recevez un email de test.
-4. **Déployer → Nouveau déploiement** → engrenage → **Application Web**
+## 2. Google Sheet pour recevoir les avis (≈ 5 min, une seule fois)
+La Sheet est déjà créée dans votre Google Drive, avec les onglets **Résumé** et **Avis** :
+https://docs.google.com/spreadsheets/d/1ab0SSU17Bkf_hKNTx0qB705vs5wBOG-unhrA5CEGc-g/edit
+
+1. Ouvrez-la, puis **Extensions → Apps Script**. Effacez le code, collez tout `Code.gs`, **Enregistrer**.
+2. Choisissez la fonction **installer** → **Exécuter** → acceptez les autorisations (« Paramètres avancés → Accéder au projet » si un avertissement apparaît). Vous recevez un email de test.
+3. **Déployer → Nouveau déploiement** → engrenage → **Application Web**
    - Exécuter en tant que : **Moi**
    - Qui a accès : **Tout le monde**
    → **Déployer**, puis copiez l'URL (elle se termine par `/exec`).
-5. Sur GitHub, ouvrez `index.html` → crayon ✏️ → collez l'URL entre les guillemets de `scriptUrl: ""` → **Commit changes**.
+4. Sur GitHub, ouvrez `index.html` → crayon ✏️ → collez l'URL entre les guillemets de `scriptUrl: ""` → **Commit changes**.
 
 > Tant que `scriptUrl` est vide, le site fonctionne en **mode démo** : l'écran Merci s'affiche mais rien n'est enregistré.
 
