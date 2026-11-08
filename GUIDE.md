@@ -14,17 +14,19 @@ Les 3 photos sont dans le dossier **photos** et défilent toutes seules en haut 
 - **Cadrage** : la partie de la photo qui reste visible. `"50% 30%"` = centre, un peu vers le haut (pour garder les visages).
 - **Vitesse** : `delaiPhoto` (en millisecondes).
 
-## 2. Google Sheet pour recevoir les avis (≈ 5 min, une seule fois)
-La Sheet est déjà créée dans votre Google Drive, avec les onglets **Résumé** et **Avis** :
-https://docs.google.com/spreadsheets/d/1ab0SSU17Bkf_hKNTx0qB705vs5wBOG-unhrA5CEGc-g/edit
+## 2. Google Sheet pour recevoir les avis (≈ 10 min, une seule fois)
+Tout se fait avec le compte **contact@livservice.com**, dans une fenêtre où **lui seul** est connecté (navigation privée par exemple). Avec plusieurs comptes Google connectés en même temps, Apps Script refuse le déploiement (« Vous n'avez pas l'autorisation d'effectuer cette action »).
 
-1. Ouvrez-la, puis **Extensions → Apps Script**. Effacez le code, collez tout `Code.gs`, **Enregistrer**.
-2. Choisissez la fonction **installer** → **Exécuter** → acceptez les autorisations (« Paramètres avancés → Accéder au projet » si un avertissement apparaît). Vous recevez un email de test.
-3. **Déployer → Nouveau déploiement** → engrenage → **Application Web**
-   - Exécuter en tant que : **Moi**
-   - Qui a accès : **Tout le monde**
+1. Ouvrez la Sheet « Liv Services – Avis clients » partagée avec contact@, puis **Fichier → Créer une copie**. Nommez-la « Liv Services – Avis clients » et rangez-la dans le Drive de l'entreprise. La copie (onglets Résumé et Avis) appartient alors à contact@.
+2. Dans la copie : **Extensions → Apps Script**. Effacez le code présent, collez tout `Code.gs`, **Enregistrer**. Renommez le projet « Liv – Avis clients ».
+3. Choisissez la fonction **installer** → **Exécuter** → acceptez les autorisations (« Paramètres avancés → Accéder au projet (non sécurisé) » → **Autoriser**). Un email de test arrive sur contact@livservice.com.
+4. **Déployer → Nouveau déploiement** → engrenage → **Application Web**
+   - Exécuter en tant que : **Moi** (contact@livservice.com)
+   - Qui a accès : **Tout le monde**. Si seule l'option « Toute personne de livservice.com » existe, l'administrateur Google Workspace doit autoriser le partage public des applications Web, sinon les clients ne pourront pas envoyer d'avis.
    → **Déployer**, puis copiez l'URL (elle se termine par `/exec`).
-4. Sur GitHub, ouvrez `index.html` → crayon ✏️ → collez l'URL entre les guillemets de `scriptUrl: ""` → **Commit changes**.
+5. Collez l'URL entre les guillemets de `scriptUrl: ""` dans `index.html`, sur GitHub (crayon ✏️ → **Commit changes**).
+
+Les emails d'alerte (avis à 1 ou 2 étoiles) partent vers `EMAIL_ALERTE`, réglé sur contact@livservice.com dans `Code.gs`.
 
 > Tant que `scriptUrl` est vide, le site fonctionne en **mode démo** : l'écran Merci s'affiche mais rien n'est enregistré.
 

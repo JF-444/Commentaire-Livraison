@@ -1,7 +1,6 @@
 /**
  * Liv Services — Avis clients après livraison
- * À coller dans la Google Sheet « Liv Services – Avis clients » :
- * https://docs.google.com/spreadsheets/d/1ab0SSU17Bkf_hKNTx0qB705vs5wBOG-unhrA5CEGc-g/edit
+ * À coller dans la Google Sheet « Liv Services – Avis clients » du compte contact@livservice.com
  * Extensions > Apps Script (remplace tout le code présent)
  *
  * Onglet "Avis"   : rempli automatiquement (Date | Prénom | Note | Commentaire | Points | Référence | Appareil)
@@ -14,7 +13,7 @@ const ENTETES = ["Date", "Prénom", "Note", "Commentaire", "Points", "Référenc
 const ALERTE_SI_NOTE_MAX = 2; // mettre 0 pour ne jamais recevoir d'email
 // Adresse qui reçoit les emails d'alerte. Laisser "" pour utiliser le compte qui a déployé le script.
 // Plusieurs adresses possibles, séparées par une virgule : "contact@exemple.com,moi@gmail.com"
-const EMAIL_ALERTE = "";
+const EMAIL_ALERTE = "contact@livservice.com";
 
 function destinataire_() { return EMAIL_ALERTE || Session.getEffectiveUser().getEmail(); }
 
