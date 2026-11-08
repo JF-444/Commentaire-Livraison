@@ -4,15 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Votre avis – Liv Services</title>
-<meta name="description" content="Comment s'est passée votre livraison Liv ? Donnez-nous votre avis en 30 secondes pour nous aider à améliorer notre service.">
+<meta name="description" content="Comment s'est passée votre livraison Liv Services ? Donnez-nous votre avis en 30 secondes pour nous aider à améliorer notre service.">
 <meta name="theme-color" content="#0F3D2E">
-<meta property="og:title" content="Comment s'est passée votre livraison Liv ?">
+<meta property="og:title" content="Liv Services – Comment s'est passée votre livraison ?">
 <meta property="og:description" content="30 secondes pour nous aider à améliorer notre service. Merci !">
-<meta property="og:image" content="https://jf-444.github.io/Commentaire-Livraison/icon-512.png">
+<meta property="og:image" content="https://jf-444.github.io/Commentaire-Livraison/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo Liv Services – Votre avis compte">
+<meta property="og:site_name" content="Liv Services">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:type" content="website">
 <meta name="robots" content="noindex">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap">
@@ -297,7 +303,7 @@ footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:cente
 
     <div class="why" id="why">
       <svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4l-5.2 2.7 1-5.8L3.5 9.2l5.9-.8z"/></svg>
-      <p>Chaque avis est lu par l'équipe Liv. Il nous aide à former nos livreurs et à corriger ce qui ne va pas, <b>pour faire mieux la prochaine fois</b>.</p>
+      <p>Chaque avis est lu par l'équipe Liv Services. Il nous aide à former nos livreurs et à corriger ce qui ne va pas, <b>pour faire mieux la prochaine fois</b>.</p>
     </div>
 
     <!-- MERCI -->
@@ -310,9 +316,9 @@ footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:cente
       <h2>Merci <em id="tName"></em>&nbsp;!</h2>
       <p id="tMsg">Votre avis est bien arrivé chez nous.</p>
       <p>Il nous permettra d'améliorer notre service pour la prochaine fois.</p>
-      <p class="big">À très bientôt sur Liv ! 🛵</p>
+      <p class="big">À très bientôt chez Liv Services ! 🛵</p>
       <a class="btn btn-forest" id="orderLink" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Commander sur Liv
+        <svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Commander chez Liv Services
       </a>
       <button class="btn btn-soft" id="again" type="button">Donner un autre avis</button>
     </section>
@@ -518,7 +524,7 @@ footer{color:var(--muted);font-size:13px;padding-block:6px 30px;text-align:cente
     $("tName").textContent = prenom;
     $("recap").innerHTML = `<span class="st">${"★".repeat(note)}${"☆".repeat(5 - note)}</span><span>${LABELS[note]}</span>`;
     $("tMsg").textContent = note <= 2
-      ? "Nous sommes désolés que cette livraison n'ait pas été à la hauteur. Votre message a été transmis à l'équipe Liv."
+      ? "Nous sommes désolés que cette livraison n'ait pas été à la hauteur. Votre message a été transmis à l'équipe Liv Services."
       : note === 3 ? "Votre avis est bien arrivé. On note vos remarques pour progresser."
       : "Votre avis est bien arrivé. Ça fait plaisir à toute l'équipe, et à votre livreur !";
     $("thanks").hidden = false;
